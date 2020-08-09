@@ -1,0 +1,305 @@
+{% extends "template.html" %}
+
+    {% block code_block %}
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, textarea, label {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      position: absolute;
+      margin:0;
+      font-size: 60px;
+      color: #fff;
+      z-index: 2;
+      line-height: 83px;
+      top:30px;
+      }
+      legend {
+      padding: 10px;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 18px;
+      color: #fff;
+      background-color: #1c87c9;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 20px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 0 8px #006622;
+      }
+      .banner {
+      position: relative;
+      height: 250px;
+      background-image: url("/uploads/media/default/0001/02/cc6bc584f236c7234947015b89151ab6d04c4cbf.jpeg");
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+      .banner::after {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      input[type="date"] {
+      padding: 4px 5px;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .item:hover p, .item:hover i, .question:hover p, .question label:hover, input:hover::placeholder {
+      color:  #006622;
+      }
+      .checkbox input[type=checkbox] {
+      display:inline-block;
+      height:15px;
+      width:15px;
+      margin-right:5px;
+      vertical-align:text-top;
+      }
+      .item input:hover, .item select:hover, .item textarea:hover {
+      border: 1px solid transparent;
+      box-shadow: 0 0 3px 0  #006622;
+      color: #006622;
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      .item span {
+      color: red;
+      }
+      .week {
+      display:flex;
+      justfiy-content:space-between;
+      }
+      .colums {
+      display:flex;
+      justify-content:space-between;
+      flex-direction:row;
+      flex-wrap:wrap;
+      }
+      .colums div {
+      width:48%;
+      }
+      input[type=radio], input[type=checkbox]  {
+      display: none;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      margin: 5px 20px 15px 0;
+      cursor: pointer;
+      }
+      .question span {
+      margin-left: 30px;
+      }
+      .question-answer label {
+      display: block;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      }
+      input[type=radio]:checked + label:before, label.radio:hover:before {
+      border: 2px solid  #006622;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 5px;
+      width: 8px;
+      height: 4px;
+      border: 3px solid  #006622;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      .flax {
+      display:flex;
+      justify-content:space-around;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background:  #1c87c9;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background:  #0692e8;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item input, .name-item div {
+      width: calc(50% - 20px);
+      }
+      .name-item div input {
+      width:97%;}
+      .name-item div label {
+      display:block;
+      padding-bottom:5px;
+      }
+      }
+	.form {
+		width : 834px;
+		height: 36px;
+		background-color:white;
+	}
+    </style>
+
+  <body>
+    <div class="testbox">
+    <form>
+      <div class="banner">
+        <h1>Superstore Sales Prediction</h1>
+      </div>
+      <br/>
+      <fieldset>
+        <legend>Daily Sales Prediction</legend>
+        <div class="colums">
+          <form action="/predict/Daily_prediction/prediction" method="POST">
+              <div class="form-group">
+                <label for="" class="highlight">Algorithm<span>*</span></label><br>
+                <select name="algorithm" class="form">
+                    <option value="0">Random Forest</option>
+                    <option value="1">Decision Tree</option>
+                </select>
+            </div>
+ 		<div class="form-group">
+                <label for="">Region</label>
+                <select name="Region" class="form">
+                    <option value="7">North</option>
+                    <option value="3">Central</option>
+                    <option value="0">Africa</option>
+                    <option value="8">North Asia</option>
+                </select>
+            </div>
+ <div class="form-group">
+                <label for="" class="highlight">City</label>
+                <select name="City" class="form">
+                    <option value="375">Berlin</option>
+                    <option value="785">Constantine</option>
+                    <option value="3453">Wagga Wagga</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="" class="highlight">Segment</label>
+                <select name="Segment" class="form">
+                    <option value="0">Consumer</option>
+                    <option value="2">Home Office</option>
+                    <option value="1">Corporate</option>
+                </select>
+            </div>
+ <div class="form-group">
+                <label for="" class="highlight">Category</label>
+                <select name="Category" class="form">
+                    <option value="1">Office Supplies</option>
+                    <option value="0">Furniture</option>
+                    <option value="2">Technology</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="" class="highlight">Sub_Category</label>
+                <select name="Sub_Category" class="form">
+                    <option value="0">Accessories</option>
+                    <option value="12">Paper</option>
+                    <option value="14">Storage</option>
+                    <option value="15">Supplies</option>
+                    <option value="9">Furnishings</option>
+                    <option value="3">Binders</option>
+                    <option value="7">Envelopes</option>
+                    <option value="10">Labels</option>
+                    <option value="2">Art</option>
+                    <option value="1">Appliances</option>
+                    <option value="4">Bookcases</option>
+                    <option value="6">Copiers</option>
+                    <option value="11">Machines</option>
+                    <option value="8">Fasteners</option>
+                    <option value="5">Chairs</option>
+                    <option value="13">Phones</option>
+                    <option value="16">Tables</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for=""class="highlight">Discount</label>
+                <input type="number" step="1" min="0" max="100" name="Discount" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="" class="highlight">Price</label>
+                        <input type="number"step="1" min="1" max="10000" name="Price"class="form-control"required>
+            </div>
+            <div class="form-group" >
+                  <label>
+    Enter Date:
+    <input type="date" name="Date">
+  </label>
+            </div>
+
+      </fieldset>
+      <br/>
+
+      <div class="btn-block">
+      <button type="order" href="/">Predict</button>
+      </div>
+    </form>
+    </div>
+  </body>
+
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "template.html" %}
+{% block code_block %}
+
+<html lang="en">
+
+<head>
+    <title>SuperStore Sales Prediction </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url("static/6338980542_438cf9309f_o(1).jpg");
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            align-content: center;
+            margin: 0px auto;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Bree Serif', serif;
+        }
+
+        #div1 {
+            height: 400px;
+            width: 1200px;
+            position: relative;
+            left: 33%;
+            top: 200px;
+        }
+
+        .img_1 {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn {
+            height: 50px;
+            width: 200px;
+            background: white;
+            border-radius: 50px;
+        }
+
+        .btn:hover {
+            height: 50px;
+            width: 200px;
+            background: rgb(221, 136, 136);
+            border-radius: 50px;
+            color: white;
+        }
+
+        @media only screen and (max-width: 600px) {
+            strategic-about-your-shopper.jpg #div1 {
+                height: 100%;
+                width: 100%;
+
+                position: relative;
+                left: 10px;
+                top: -0px;
+            }
+        }
+
+        @media only screen and (max-width: 1200px) {
+            #div1 {
+                height: 100%;
+                width: 50%;
+                position: relative;
+                left: 10px;
+                top: -0px;
+            }
+        }
+
+        @media only screen and (max-width: 1600px) {
+            #div1 {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                left: 10px;
+                top: -0px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <button onclick="myFunction()">About</button>
+    <p id="demo"></p>
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Hello Dear Visitor!</br> Regression is an important machine learning model for these kinds of problems. Predicting sales of a company needs time series data of that company and based on that data the model can predict the future sales of that company or product. So, in this research project we will analyze the time series sales data of a company and will predict the sales of the company for the coming quarter and for a specific product. For this kind of project of sales predict, we will apply the linear regression and logistic regression and evaluate the result based on the training, testing and validation set of the data. ";
+        }
+    </script>
+    <div class="container-fluid">
+        <div id="div1" class="row">
+            <div class="col-md-6"
+                style="background-image: linear-gradient(to bottom, #ffb98a, rgba(214, 214, 214, 0));">
+                <center>
+                    <h1 style="color:white; font-size: 350%;">SUPERSTORE SALES ANALYSIS</h1>
+                </center>
+                <br>
+                <center><img class="img_1" style="width : 80%;"
+                        src="{{url_for('static', filename='output-onlinepngtools (1).png')}}" alt=""></center>
+                <br>
+                <br>
+                <center>
+                    <a href="/analyse"><button class="btn" style="font-size: 20px; font-weight: bold">
+                            Analyze Sales
+                        </button></a>&nbsp; &nbsp; &nbsp; &nbsp;
+                    <a href="/predict"><button class="btn" style="font-size: 20px; font-weight: bold">
+                            Predict Sales
+                        </button></a>
+                </center>
+                <br>
+                <br>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-copyright text-center py-3">
+        <p align="right">Posted by: 1.Pratika Sawant 2.Deepali Lad</p>
+        <p align="right">Contact On:
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pratikasawant96@gmail.com" target="blank"
+                style="text-decoration: none;">pratikasawant96@gmail.com</a>
+        </p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+</body>
+{% endblock %}

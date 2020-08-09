@@ -1,0 +1,260 @@
+{% extends "template.html" %}
+
+    {% block code_block %}
+<style>
+    .main-box {
+        /* background-color: red; */
+        height: 800px;
+        width: 780px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-left: 10%;
+    }
+
+    .row-select {
+        display: block;
+        /* border: 1px solid black; */
+        /* background-color: #aab1b9; */
+        background-color: #e2e2e2;
+        padding-left: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        height: 50px;
+        /* width: 100%; */
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .text {
+        /* color: gray; */
+        display: inline;
+        font-size: 18px;
+    }
+    .button_style{
+    background-color: #092953 !important;
+ border-radius: 15px;
+ padding: 20px;
+  width: 120px;
+  height: 60px;
+    }
+    .vdropdown {
+        /* height: 2px; */
+        /* border: 20px solid black; */
+        height: 30px;
+        border-radius: 20px;
+        width: 50%;
+        border: none;
+        color: white;
+        /* background-color: ; */
+        font-size: 18px;
+        /* padding-left: 0; */
+        outline: none;
+        /* opacity: 0.; */
+        background-color: rgb(23, 110, 130);
+    }
+
+    .pcnt {
+        border: black;
+        height: 20px;
+        width: 100px;
+        /* text-align: center; */
+        /* background: none; */
+        font-size: 16px;
+    }
+
+    .loc-block {
+        border: none;
+        height: 25px;
+        width: 200px;
+        /* color: gray; */
+        color: green; font-size: 16px;
+        position: relative;
+        /* margin-left: 5px; */
+        /* padding-left: 5px; */
+        background: none;
+        outline: none;
+    }
+</style>
+
+<!-- <body class="body" style="background-color: black"> -->
+<body style="background-color: #81b7b7">
+    <center>
+        <h1 style="color:black">
+            <strong><i>Daily Sale Prediction</i>
+            </strong></h1>
+    </center>
+
+    <div class="main-box">
+        <h4 style="color:black">Enter Details For Prediction</h4>
+
+        <form action="/predict/monthly_prediction/prediction" method="POST">
+            <div class="row-select">
+                <div class="text">Algorithm</div>
+                <select class="vdropdown" style="margin-left: 200px;" name="algorithm" class="form-control">
+                    <option value="">Select Algorithm</option>
+                    <option value="0">Random Forest</option>
+                    <option value="1">Decision Tree</option>
+                </select>
+            </div>
+            <div class="row-select">
+                <div class="text">Select Region:</div>
+                <select class="vdropdown" style="margin-left: 160px;" name="Region" id="countySel" size="1">
+                    <option value="" selected="selected">Select Region</option>
+                </select>
+            </div>
+            <div class="row-select">
+                <div class="text">Select Country:</div>
+                <select class="vdropdown" style="margin-left: 154px;" name="Country" id="stateSel" size="1">
+                    <option value="" selected="selected">Please select Region first</option>
+                </select>
+            </div>
+
+            <div class="row-select">
+                <div class="text">Select City: </div>
+                <select class="vdropdown" style="margin-left: 185px;" name="City" id="districtSel" size="1">
+                    <option value="" selected="selected">Please select Country first</option>
+                </select>
+            </div>
+            <div class="row-select">
+                <div class="text">Segment</div>
+                <select class="vdropdown" style="margin-left: 206px;" name="Segment" class="form-control">
+                    <option value="">Select Segment</option>
+                    <option value="0">Consumer</option>
+                    <option value="2">Home Office</option>
+                    <option value="1">Corporate</option>
+                </select>
+            </div>
+            <div class="row-select">
+                <div onload="resetSelection()">
+                    <div class="text">Enter Category & Sub-Category</div>
+
+                    <select class="vdropdown" style="width: 25%; margin-left: 24px;" name="Category" id="countrySelect"
+                        size="1" onchange="makeSubmenu(this.value)">
+                        <option value="" disabled selected>Choose Category</option>
+                        <option>Furniture</option>
+                        <option>Technology</option>
+                        <option>Office Supplies</option>
+                    </select>
+                    <select class="vdropdown" style="width: 30%; margin-left: 20px;" name="Sub_Category" id="citySelect"
+                        size="1">
+                        <option value="" disabled selected>Choose Sub-Category</option>
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row-select">
+                <div class="text">Discount</div>
+                <input type="number" step="1" min="0" max="100" name="Discount" class="pcnt" style="margin-left: 214px;"
+                    required value="0">
+            </div>
+            <div class="row-select">
+                <div class="text">Price</div>
+                <input type="number" step="1" min="1" max="10000" name="Price" class="pcnt" style="margin-left: 243px;"
+                    required value="0">
+            </div>
+              <div class="row-select">
+                <div class="text">Month</div>
+                <input type="number" step="1" min="1" max="12" name="Month" class="pcnt" style="margin-left: 235px;"
+                    required value="0">
+            </div>
+            <div class="row-select">
+                <div class="text">Year</div>
+                <input type="number" step="1" min="1900" max="3000" name="Year" class="pcnt" style="margin-left: 243px;"
+                    required value="0">
+            </div>
+               <br>
+            <div class="row-select" style="background: none;">
+                <center><input type="submit" value="Predict" class="btn btn-success button_style" style="float: left; margin-left: 25%; font-size: 20px;"></center>
+                <center><a href="/predict"><button class="btn btn-success button_style" style="float: right; margin-right: 30%; font-size: 20px;">Back</button></a></center>
+            </div>
+        </form>
+    </div>
+
+</body>
+            <script>
+var stateObject = {
+"Africa": { "Angola": ["Benguela"],
+"Egypt": ["Cairo"],
+"Libya": ["Alexandria"],
+"South Africa": ["Johannesburg"]
+},
+"Canada": {
+"Canada": ["London", "New York City"],
+},
+"Caribbean":{
+"Cuba": ["Santa Clara", "Santiago de Cuba","Manzanillo"]
+},
+"Central": {
+"Austria": ["Vienna", "Graz"],
+"Belgium": ["Namur", "Ghent"],
+"El Salvador": ["Mejicanos", "San Salvador","Soyapango"],
+"France": ["Lille", "Lyon", "Paris"]
+},
+"Central Asia": {
+"India": ["Pune", "New Delhi", "Gorakhpur"]
+},
+"Oceania": {
+"Australia": ["Brisbane", "Adelaide","Melbourne", "Sydney","Wollongong"],
+"Spain": ["Barcelona", "Madrid"]
+},
+"Southeast Asia": {
+"Indonesia": ["Jakarta", "Bandung"],
+"Thailand": ["Bangkok"]
+},
+}
+window.onload = function () {
+var countySel = document.getElementById("countySel"),
+stateSel = document.getElementById("stateSel"),
+districtSel = document.getElementById("districtSel");
+for (var country in stateObject) {
+countySel.options[countySel.options.length] = new Option(country, country);
+}
+countySel.onchange = function () {
+stateSel.length = 1; // remove all options bar first
+districtSel.length = 1; // remove all options bar first
+if (this.selectedIndex < 1) return; // done
+for (var state in stateObject[this.value]) {
+stateSel.options[stateSel.options.length] = new Option(state, state);
+}
+}
+countySel.onchange(); // reset in case page is reloaded
+stateSel.onchange = function () {
+districtSel.length = 1; // remove all options bar first
+if (this.selectedIndex < 1) return; // done
+var district = stateObject[countySel.value][this.value];
+for (var i = 0; i < district.length; i++) {
+districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+}
+}
+}
+</script>
+<script type="text/javascript">
+var citiesByState = {
+ "Office Supplies": ["Envelopes","Fasteners","Appliances","Storage","Supplies","Binders","Paper","Art","Labels"],
+            Furniture: ["Furnishings","Bookcases","Chairs","Tables"],
+            Technology: ["Copiers","Accessories","Phones","Machines"]
+
+
+}
+function makeSubmenu(value) {
+if(value.length==0) document.getElementById("citySelect").innerHTML = "<option></option>";
+else {
+var citiesOptions = "";
+for(cityId in citiesByState[value]) {
+citiesOptions+="<option>"+citiesByState[value][cityId]+"</option>";
+}
+document.getElementById("citySelect").innerHTML = citiesOptions;
+}
+}
+function displaySelected() { var country = document.getElementById("countrySelect").value;
+var city = document.getElementById("citySelect").value;
+alert(country+"\n"+city);
+}
+function resetSelection() {
+document.getElementById("countrySelect").selectedIndex = 0;
+document.getElementById("citySelect").selectedIndex = 0;
+}
+</script>
+{% endblock %}

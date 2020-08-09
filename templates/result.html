@@ -1,0 +1,32 @@
+{% extends "template.html" %}
+
+    {% block code_block %}
+    <style>
+
+
+        .highlight{
+            color:white;
+               }
+         body{
+        background-image:url(http://all4desktop.com/data_images/original/4236532-background-images.jpg);
+        height:90%;
+        width:90%;
+        background-size: cover;
+        align-content: center;
+        margin: 0px auto;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Bree Serif', serif;
+        }
+
+
+    </style>
+<center>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br><br> <br>
+
+            <div><h3>Algorithm: </h3> {{algorithm}}</div>
+            <div><h3>Accuracy: </h3> {{accuracy }}%</div>
+            <div><h3>Predicted Quantity: </h3> {{Prediction}}</div>
+            <div><h3>Total Sale : </h3> {{(Price - (Price * (Discount/100))) * Prediction }}</div>
+</center>
+    {% endblock %}
